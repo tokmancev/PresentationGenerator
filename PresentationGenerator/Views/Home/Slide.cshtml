@@ -1,0 +1,105 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=devise-width, initial-scale=1">
+    <title>Слайд</title>
+    <style>
+        .brd {
+            padding: 2px; /* Поля вокруг текста */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="#"></a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Инструкция</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/")">Главная</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="container-fluid" style="background-color: #F8F8FF">
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="slideTitle">Заголовок слайда</label>
+                            <textarea class="form-control" rows="1" id="slideTitle" name="slideTitle">@ViewBag.SlideTitle</textarea>
+                            <label for="slideText">Текст слайда</label>
+                            <textarea class="form-control" rows="5" id="slideText" name="slideText">@ViewBag.SlideText</textarea>
+                            <textarea class="d-none" rows="1" name="slideDir">@ViewBag.presDir</textarea>
+                            <textarea class="d-none" rows="1" name="slideBg">@ViewBag.BackgroundPath</textarea>
+                            <textarea class="d-none" rows="1" name="slideId">@ViewBag.SlideId</textarea>
+                            <textarea class="d-none" rows="1" name="slideName">@ViewBag.SlideName</textarea>
+                            <button type="submit" class="btn btn-success text-center my-4 mx-auto">Сохранить изменения!</button>
+                            <a class="btn btn-primary" href="@Url.Content(ViewBag.DownloadLink)" role="button" download>Скачать презентацию</a>
+                            <h5 class="my-4 mt-5">@ViewBag.Warning</h5>
+                        </div>
+                    </form>
+
+                <div class="container-fluid">
+                     <div class="row">
+                       <div class="brd">
+                            <a class="btn btn-secondary " href="@Url.Content(ViewBag.PreviousSlide)" role="button">Предыдущий слайд</a>
+                        </div>
+                        
+                         <div class="brd">
+                             <a class="btn btn-secondary " href="@Url.Content(ViewBag.NextSlide)" role="button">Следующий  слайд</a>
+                         </div>
+
+
+                     </div>
+                 </div>
+
+
+
+
+        </div>
+            </div>
+
+            <div class="col-lg-8 p-5" style="background-color: #F8F8FF">
+                <div class="container-fluid">
+                    <img class="container-fluid" width="600" height="550" src="@Url.Content(ViewBag.SlidePath)">
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        $('#slideText').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']]   
+            ]
+        });
+    });
+</script>
+
+        
+
+</body>
+</html>
