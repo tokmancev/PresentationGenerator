@@ -95,9 +95,9 @@ namespace Presentation_Generator.Controllers
                 }
             if (textsFile != null && textsFile.FileName.Contains(".txt") && IsSlidesCreated(presentationDir, textsFile))
             {
-                return Redirect("/Home/Slide/0/" + presentationId);
+                return Redirect("~/Home/Slide/0/" + presentationId);
             }
-            return Redirect("/Home/Error");
+            return Redirect("~/Home/Error");
         }
 
         [HttpPost]
@@ -114,7 +114,7 @@ namespace Presentation_Generator.Controllers
                 jsonFormatter.WriteObject(fs, modifiedSlide);
             }
             ArchivePresentation(slideDir);
-            return Redirect("/Home/Slide/" + slideId + "/" + slideName);
+            return Redirect("~/Home/Slide/" + slideId + "/" + slideName);
         }
 
         private void LoadDefaultBackground(string presentationDir)
