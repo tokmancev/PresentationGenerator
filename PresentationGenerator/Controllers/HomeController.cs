@@ -53,13 +53,13 @@ namespace Presentation_Generator.Controllers
         [HttpGet]
         public ActionResult Slide(int id, string name)
         {
-            var slidePaths = Directory.GetFiles(GetServerPath("~/Presentations/" + name + "/Slides")).ToList(); 
+            var slidePaths = Directory.GetFiles(GetServerPath("Presentations/" + name + "/Slides")).ToList(); 
             var slides = slidePaths
-              .Select(path => "~/Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
+              .Select(path => "Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
             if (id >= slides.Count) id = id - 1;
             if (id < 0) id = 0;
             var jsonFormatter = new DataContractJsonSerializer(typeof(Slide));
-            var jsonPath = GetServerPath("~/Presentations/" + name + "/SlidesJSON/" + id.ToString() + ".json");
+            var jsonPath = GetServerPath("Presentations/" + name + "/SlidesJSON/" + id.ToString() + ".json");
             using (var fs = new FileStream(jsonPath, FileMode.OpenOrCreate))
             {
                 var slide = (Slide)jsonFormatter.ReadObject(fs);
@@ -73,9 +73,9 @@ namespace Presentation_Generator.Controllers
             ViewBag.SlideId = id;
             ViewBag.SlideName = name;
             ViewBag.SlidePath = slides[id];
-            ViewBag.NextSlide = "~/Home/Slide/" + (id + 1).ToString() + "/" + name;
-            ViewBag.PreviousSlide = "~/Home/Slide/" + (id - 1).ToString() + "/" + name;
-            ViewBag.DownloadLink = "~/Presentations/" + name + "/Slides.zip";
+            ViewBag.NextSlide = "/Home/Slide/" + (id + 1).ToString() + "/" + name;
+            ViewBag.PreviousSlide = "/Home/Slide/" + (id - 1).ToString() + "/" + name;
+            ViewBag.DownloadLink = "Presentations/" + name + "/Slides.zip";
             return View();
         }
 
@@ -83,7 +83,7 @@ namespace Presentation_Generator.Controllers
         public RedirectResult Index(List<IFormFile> upload)
         {
             var presentationId = GetPresentationId();
-            var presentationDir = GetServerPath("~/Presentations/" + presentationId);
+            var presentationDir = GetServerPath("Presentations/" + presentationId);
             CreatePresentationDir(presentationDir);
             var textsFile = upload.ToArray()[0];
             var backgroundsFile = upload.ToArray()[1];
@@ -95,9 +95,9 @@ namespace Presentation_Generator.Controllers
                 }
             if (textsFile != null && textsFile.FileName.Contains(".txt") && IsSlidesCreated(presentationDir, textsFile))
             {
-                return Redirect("~/Home/Slide/0/" + presentationId);
+                return Redirect("/Home/Slide/0/" + presentationId);
             }
-            return Redirect("~/Home/Error");
+            return Redirect("/Home/Error");
         }
 
         [HttpPost]
@@ -114,12 +114,12 @@ namespace Presentation_Generator.Controllers
                 jsonFormatter.WriteObject(fs, modifiedSlide);
             }
             ArchivePresentation(slideDir);
-            return Redirect("~/Home/Slide/" + slideId + "/" + slideName);
+            return Redirect("/Home/Slide/" + slideId + "/" + slideName);
         }
 
         private void LoadDefaultBackground(string presentationDir)
         {
-            System.IO.File.Copy(GetServerPath("~/Presentations/default.jpg"), presentationDir + "/Backgrounds/default.jpg");
+            System.IO.File.Copy(GetServerPath("Presentations/default.jpg"), presentationDir + "/Backgrounds/default.jpg");
         }
 
         
