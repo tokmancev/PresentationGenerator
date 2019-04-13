@@ -53,13 +53,13 @@ namespace Presentation_Generator.Controllers
         [HttpGet]
         public ActionResult Slide(int id, string name)
         {
-            var slidePaths = Directory.GetFiles(GetServerPath("Presentations/" + name + "/Slides")).ToList(); 
+            var slidePaths = Directory.GetFiles(GetServerPath("~/Presentations/" + name + "/Slides")).ToList(); 
             var slides = slidePaths
               .Select(path => "~/Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
             if (id >= slides.Count) id = id - 1;
             if (id < 0) id = 0;
             var jsonFormatter = new DataContractJsonSerializer(typeof(Slide));
-            var jsonPath = GetServerPath("Presentations/" + name + "/SlidesJSON/" + id.ToString() + ".json");
+            var jsonPath = GetServerPath("~/Presentations/" + name + "/SlidesJSON/" + id.ToString() + ".json");
             using (var fs = new FileStream(jsonPath, FileMode.OpenOrCreate))
             {
                 var slide = (Slide)jsonFormatter.ReadObject(fs);
@@ -83,7 +83,7 @@ namespace Presentation_Generator.Controllers
         public RedirectResult Index(List<IFormFile> upload)
         {
             var presentationId = GetPresentationId();
-            var presentationDir = GetServerPath("Presentations/" + presentationId);
+            var presentationDir = GetServerPath("~/Presentations/" + presentationId);
             CreatePresentationDir(presentationDir);
             var textsFile = upload.ToArray()[0];
             var backgroundsFile = upload.ToArray()[1];
@@ -119,7 +119,7 @@ namespace Presentation_Generator.Controllers
 
         private void LoadDefaultBackground(string presentationDir)
         {
-            System.IO.File.Copy(GetServerPath("Presentations/default.jpg"), presentationDir + "/Backgrounds/default.jpg");
+            System.IO.File.Copy(GetServerPath("~/Presentations/default.jpg"), presentationDir + "/Backgrounds/default.jpg");
         }
 
         
