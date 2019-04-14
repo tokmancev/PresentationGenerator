@@ -88,7 +88,7 @@ namespace Presentation_Generator.Controllers
             //assert upload.Count() == 2
             if(upload!= null && upload.Count < 2)
             {
-                //Console.WriteLine("Empty upload list");
+                Console.WriteLine("Empty upload list");
                 return Redirect("/Home/Error");
             }
             var textsFile = upload[0];//!!! ToArray
