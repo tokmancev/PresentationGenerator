@@ -47,3 +47,4 @@ C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\net
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.dll
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.pdb
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.csproj.CopyComplete
+C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.csprojAssemblyReference.cache
