@@ -30,7 +30,6 @@ C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\bin\Debug\net
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\bin\Debug\netcoreapp2.2\PresentationGenerator.pdb
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\bin\Debug\netcoreapp2.2\PresentationGenerator.Views.dll
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\bin\Debug\netcoreapp2.2\PresentationGenerator.Views.pdb
-C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.csprojAssemblyReference.cache
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.csproj.CoreCompileInputs.cache
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.RazorAssemblyInfo.cache
 C:\Tokmantsev\Projects\PresentationGenerator\PresentationGenerator\obj\Debug\netcoreapp2.2\PresentationGenerator.RazorAssemblyInfo.cs

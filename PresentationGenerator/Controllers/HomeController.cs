@@ -56,7 +56,7 @@ namespace Presentation_Generator.Controllers
             var slidePaths = Directory.GetFiles(GetServerPath("Presentations/" + name + "/Slides")).ToList(); 
             var slides = slidePaths
               .Select(path => "Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
-            if (id >= slides.Count) id = id - 1;
+            if (id >= slides.Count) id = slides.Count - 1;//!!!
             if (id < 0) id = 0;
             var jsonFormatter = new DataContractJsonSerializer(typeof(Slide));
             var jsonPath = GetServerPath("Presentations/" + name + "/SlidesJSON/" + id.ToString() + ".json");
@@ -85,8 +85,14 @@ namespace Presentation_Generator.Controllers
             var presentationId = GetPresentationId();
             var presentationDir = GetServerPath("Presentations/" + presentationId);
             CreatePresentationDir(presentationDir);
-            var textsFile = upload.ToArray()[0];
-            var backgroundsFile = upload.ToArray()[1];
+            //assert upload.Count() == 2
+            if(upload!= null && upload.Count < 2)
+            {
+                //Console.WriteLine("Empty upload list");
+                return Redirect("/Home/Error");
+            }
+            var textsFile = upload[0];//!!! ToArray
+            var backgroundsFile = upload[1];//!!! ToArray
             if (backgroundsFile == null 
                 || !backgroundsFile.FileName.Contains(".zip") 
                 || !IsBackgroundsExtracted(presentationDir, backgroundsFile))
@@ -139,7 +145,7 @@ namespace Presentation_Generator.Controllers
                     return false;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

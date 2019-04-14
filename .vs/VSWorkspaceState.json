@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\PresentationGenerator",
+    "\\PresentationGenerator\\bin",
+    "\\PresentationGenerator\\bin\\Debug",
+    "\\PresentationGenerator\\bin\\Debug\\netcoreapp2.2",
+    "\\PresentationGenerator\\Views",
+    "\\PresentationGenerator\\Views\\Home"
+  ],
+  "SelectedNode": "\\PresentationGenerator\\PresentationGenerator.csproj",
+  "PreviewInSolutionExplorer": false
+}
