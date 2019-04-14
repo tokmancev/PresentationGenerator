@@ -2813,6 +2813,68 @@
           }
         }
       },
+      "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libcairo.so.2": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libexif.so.12": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libfontconfig.so.1": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libfreetype.so.6": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libgdiplus.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libgif.so.7": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libglib-2.0.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libjbig.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libjpeg.so.8": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libpixman-1.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libpng12.so.0": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/linux-x64/native/libtiff.so.5": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
       "runtime.native.System/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -7501,6 +7563,30 @@
         "runtimes/fedora.24-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
       ]
     },
+    "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+      "sha512": "6t5B23rZDy6xXWKWZ34Tj2mVeq+CCW4nFZmBCcC1U4lbdhWu2KCQi6Mr1fPJ0F8LErfT7ict8yL0MXL/xBvswQ==",
+      "type": "package",
+      "path": "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll",
+        "runtime.linux-x64.corecompat.system.drawing.1.0.0-beta009.nupkg.sha512",
+        "runtime.linux-x64.corecompat.system.drawing.nuspec",
+        "runtimes/linux-x64/native/libcairo.so.2",
+        "runtimes/linux-x64/native/libexif.so.12",
+        "runtimes/linux-x64/native/libfontconfig.so.1",
+        "runtimes/linux-x64/native/libfreetype.so.6",
+        "runtimes/linux-x64/native/libgdiplus.so",
+        "runtimes/linux-x64/native/libgif.so.7",
+        "runtimes/linux-x64/native/libglib-2.0.so.0",
+        "runtimes/linux-x64/native/libjbig.so.0",
+        "runtimes/linux-x64/native/libjpeg.so.8",
+        "runtimes/linux-x64/native/libpixman-1.so.0",
+        "runtimes/linux-x64/native/libpng12.so.0",
+        "runtimes/linux-x64/native/libtiff.so.5"
+      ]
+    },
     "runtime.native.System/4.3.0": {
       "sha512": "c/qWt2LieNZIj1jGnVNsE2Kl23Ya2aSTBuXMD6V7k9KWr6l16Tqdwq+hJScEpWER9753NWC8h96PaVNY5Ld7Jw==",
       "type": "package",
@@ -12170,7 +12256,8 @@
       "Microsoft.NETCore.App >= 2.2.0",
       "System.Drawing.Common >= 4.5.1",
       "System.Text.Encoding >= 4.3.0",
-      "System.Text.Encoding.CodePages >= 4.5.1"
+      "System.Text.Encoding.CodePages >= 4.5.1",
+      "runtime.linux-x64.CoreCompat.System.Drawing >= 1.0.0-beta009"
     ]
   },
   "packageFolders": {
@@ -12242,6 +12329,10 @@
           "System.Text.Encoding.CodePages": {
             "target": "Package",
             "version": "[4.5.1, )"
+          },
+          "runtime.linux-x64.CoreCompat.System.Drawing": {
+            "target": "Package",
+            "version": "[1.0.0-beta009, )"
           }
         },
         "imports": [

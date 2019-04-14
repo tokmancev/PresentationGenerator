@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "cae964edf832d1d26bf76c1aba9883acad09ff4e"
+    "signature": "27bc66e182ee62df14fa443dabef58d4f4e23391"
   },
   "compilationOptions": {
     "defines": [
@@ -29,7 +29,8 @@
           "Microsoft.NETCore.App": "2.2.0",
           "System.Drawing.Common": "4.5.1",
           "System.Text.Encoding": "4.3.0",
-          "System.Text.Encoding.CodePages": "4.5.1"
+          "System.Text.Encoding.CodePages": "4.5.1",
+          "runtime.linux-x64.CoreCompat.System.Drawing": "1.0.0-beta009"
         },
         "runtime": {
           "PresentationGenerator.dll": {}
@@ -226,6 +227,82 @@
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.2.0"
+        }
+      },
+      "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+        "dependencies": {
+          "System.Runtime": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libcairo.so.2": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libexif.so.12": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libfontconfig.so.1": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libfreetype.so.6": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libgdiplus.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libgif.so.7": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libglib-2.0.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libjbig.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libjpeg.so.8": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libpixman-1.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libpng12.so.0": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/linux-x64/native/libtiff.so.5": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
         }
       },
       "System.Drawing.Common/4.5.1": {
@@ -3354,6 +3431,13 @@
       "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "path": "netstandard.library/2.0.3",
       "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6t5B23rZDy6xXWKWZ34Tj2mVeq+CCW4nFZmBCcC1U4lbdhWu2KCQi6Mr1fPJ0F8LErfT7ict8yL0MXL/xBvswQ==",
+      "path": "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009",
+      "hashPath": "runtime.linux-x64.corecompat.system.drawing.1.0.0-beta009.nupkg.sha512"
     },
     "System.Drawing.Common/4.5.1": {
       "type": "package",

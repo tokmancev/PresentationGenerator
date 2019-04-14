@@ -10,11 +10,11 @@ namespace Presentation_Generator.Controllers
     {
         public static void SaveSlideAsJpeg(Slide slide, string outputPath)
         {
-            var backgroundPicture = Image.FromFile(slide.PathToBackgroundPicture);
+            /*var backgroundPicture = Image.FromFile(slide.PathToBackgroundPicture);
             var resizedBackground = new Bitmap(backgroundPicture, 800, 600);
             PlaceTitleOnPicture(slide, resizedBackground);
             PlaceTextOnPicture(slide, resizedBackground);
-            resizedBackground.Save(outputPath, ImageFormat.Jpeg);
+            resizedBackground.Save(outputPath, ImageFormat.Jpeg);*/
         }
 
 
