@@ -89,6 +89,7 @@ namespace Presentation_Generator.Controllers
             if(upload!= null && upload.Count < 2)
             {
                 Console.WriteLine("Empty upload list");
+                //BadRequest("Invalid dimensions")
                 return Redirect("/Home/Error");
             }
             var textsFile = upload[0];//!!! ToArray
