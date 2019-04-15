@@ -3005,6 +3005,18 @@
           }
         }
       },
+      "SkiaSharp.NativeAssets.Linux/1.68.0": {
+        "type": "package",
+        "dependencies": {
+          "SkiaSharp": "1.68.0"
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -7751,6 +7763,21 @@
         "xamarin.interactive/SkiaSharp.Workbooks.dll"
       ]
     },
+    "SkiaSharp.NativeAssets.Linux/1.68.0": {
+      "sha512": "SnLgNQr4g3YUrA8wGgiS+EgOS3JrdZi10Ea/Rv89h3iDNEuvgUDyMag6sFB+xtFXeSpKYIAFh1U0f61Kh8Z+BQ==",
+      "type": "package",
+      "path": "skiasharp.nativeassets.linux/1.68.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "THIRD-PARTY-NOTICES.txt",
+        "build/net45/SkiaSharp.targets",
+        "runtimes/linux-x64/native/libSkiaSharp.so",
+        "skiasharp.nativeassets.linux.1.68.0.nupkg.sha512",
+        "skiasharp.nativeassets.linux.nuspec"
+      ]
+    },
     "System.AppContext/4.3.0": {
       "sha512": "fKC+rmaLfeIzUhagxY17Q9siv/sPrjjKcfNg1Ic8IlQkZLipo8ljcaZQu4VtI4Jqbzjc2VTjzGLF6WmsRXAEgA==",
       "type": "package",
@@ -12154,6 +12181,7 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "SKiaSharp >= 1.68.0",
+      "SkiaSharp.NativeAssets.Linux >= 1.68.0",
       "System.Text.Encoding >= 4.3.0",
       "System.Text.Encoding.CodePages >= 4.5.1"
     ]
@@ -12217,6 +12245,10 @@
             "autoReferenced": true
           },
           "SKiaSharp": {
+            "target": "Package",
+            "version": "[1.68.0, )"
+          },
+          "SkiaSharp.NativeAssets.Linux": {
             "target": "Package",
             "version": "[1.68.0, )"
           },

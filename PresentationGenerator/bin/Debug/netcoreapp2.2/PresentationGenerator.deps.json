@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "fb70437f9f38c6b27eaf10c4490ec4e876422d81"
+    "signature": "c89e9de5983cd97989ccb3f0431e0ec015d41069"
   },
   "compilationOptions": {
     "defines": [
@@ -28,6 +28,7 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "SkiaSharp": "1.68.0",
+          "SkiaSharp.NativeAssets.Linux": "1.68.0",
           "System.Text.Encoding": "4.3.0",
           "System.Text.Encoding.CodePages": "4.5.1"
         },
@@ -245,6 +246,18 @@
         },
         "compile": {
           "lib/netstandard1.3/SkiaSharp.dll": {}
+        }
+      },
+      "SkiaSharp.NativeAssets.Linux/1.68.0": {
+        "dependencies": {
+          "SkiaSharp": "1.68.0"
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libSkiaSharp.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.5.2": {
@@ -3344,6 +3357,13 @@
       "sha512": "sha512-ptuxAKk9FiClNnAgWM8hVMCYw/B0hUJWZ8W6efnIAtJmJn/Xl4jvxxDF5WOqfQYCLVzxXw5gvBPVxvTLblFp0g==",
       "path": "skiasharp/1.68.0",
       "hashPath": "skiasharp.1.68.0.nupkg.sha512"
+    },
+    "SkiaSharp.NativeAssets.Linux/1.68.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SnLgNQr4g3YUrA8wGgiS+EgOS3JrdZi10Ea/Rv89h3iDNEuvgUDyMag6sFB+xtFXeSpKYIAFh1U0f61Kh8Z+BQ==",
+      "path": "skiasharp.nativeassets.linux/1.68.0",
+      "hashPath": "skiasharp.nativeassets.linux.1.68.0.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.2": {
       "type": "package",
