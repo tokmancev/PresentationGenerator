@@ -6,3 +6,6 @@
 *.cache
 *.pdb
 .vs/PresentationGenerator/v15/.suo
+.vs/PresentationGenerator/v15/.suo
+.vs/PresentationGenerator/v15/.suo
+PresentationGenerator/Presentations/*.*

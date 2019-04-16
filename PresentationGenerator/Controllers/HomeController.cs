@@ -55,7 +55,7 @@ namespace Presentation_Generator.Controllers
         {
             var slidePaths = Directory.GetFiles(GetServerPath("Presentations/" + name + "/Slides")).ToList(); 
             var slides = slidePaths
-              .Select(path => "Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
+              .Select(path => "~/Presentations/" + name + "/Slides/" + Path.GetFileName(path)).ToList();
             if (id >= slides.Count) id = slides.Count - 1;//!!!
             if (id < 0) id = 0;
             var jsonFormatter = new DataContractJsonSerializer(typeof(Slide));
@@ -73,8 +73,8 @@ namespace Presentation_Generator.Controllers
             ViewBag.SlideId = id;
             ViewBag.SlideName = name;
             ViewBag.SlidePath = slides[id];
-            ViewBag.NextSlide = "/Home/Slide/" + (id + 1).ToString() + "/" + name;
-            ViewBag.PreviousSlide = "/Home/Slide/" + (id - 1).ToString() + "/" + name;
+            ViewBag.NextSlide = "~/Home/Slide/" + (id + 1).ToString() + "/" + name;
+            ViewBag.PreviousSlide = "~/Home/Slide/" + (id - 1).ToString() + "/" + name;
             ViewBag.DownloadLink = "Presentations/" + name + "/Slides.zip";
             return View();
         }

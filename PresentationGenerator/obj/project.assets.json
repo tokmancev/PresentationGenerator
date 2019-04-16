@@ -2709,6 +2709,24 @@
           }
         }
       },
+      "Microsoft.Win32.SystemEvents/4.5.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -2792,68 +2810,6 @@
           "runtimes/fedora.24-x64/native/System.Security.Cryptography.Native.OpenSsl.so": {
             "assetType": "native",
             "rid": "fedora.24-x64"
-          }
-        }
-      },
-      "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.1.0"
-        },
-        "compile": {
-          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll": {}
-        },
-        "runtimeTargets": {
-          "runtimes/linux-x64/native/libcairo.so.2": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libexif.so.12": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libfontconfig.so.1": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libfreetype.so.6": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libgdiplus.so": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libgif.so.7": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libglib-2.0.so.0": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libjbig.so.0": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libjpeg.so.8": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libpixman-1.so.0": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libpng12.so.0": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/linux-x64/native/libtiff.so.5": {
-            "assetType": "native",
-            "rid": "linux-x64"
           }
         }
       },
@@ -3274,6 +3230,29 @@
         },
         "compile": {
           "ref/netstandard1.5/System.Diagnostics.Tracing.dll": {}
+        }
+      },
+      "System.Drawing.Common/4.5.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "2.0.0",
+          "Microsoft.Win32.SystemEvents": "4.5.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Drawing.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Drawing.Common.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
         }
       },
       "System.Dynamic.Runtime/4.3.0": {
@@ -7269,6 +7248,26 @@
         "version.txt"
       ]
     },
+    "Microsoft.Win32.SystemEvents/4.5.0": {
+      "sha512": "LuI1oG+24TUj1ZRQQjM5Ew73BKnZE5NZ/7eAdh1o8ST5dPhUnJvIkiIn2re3MwnkRy6ELRnvEbBxHP8uALKhJw==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "microsoft.win32.systemevents.4.5.0.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "ref/net461/Microsoft.Win32.SystemEvents.dll",
+        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "NETStandard.Library/2.0.3": {
       "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
@@ -7500,30 +7499,6 @@
         "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/fedora.24-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "runtime.linux-x64.CoreCompat.System.Drawing/1.0.0-beta009": {
-      "sha512": "6t5B23rZDy6xXWKWZ34Tj2mVeq+CCW4nFZmBCcC1U4lbdhWu2KCQi6Mr1fPJ0F8LErfT7ict8yL0MXL/xBvswQ==",
-      "type": "package",
-      "path": "runtime.linux-x64.corecompat.system.drawing/1.0.0-beta009",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard1.5/runtime.linux-x64.CoreCompat.System.Drawing.dll",
-        "runtime.linux-x64.corecompat.system.drawing.1.0.0-beta009.nupkg.sha512",
-        "runtime.linux-x64.corecompat.system.drawing.nuspec",
-        "runtimes/linux-x64/native/libcairo.so.2",
-        "runtimes/linux-x64/native/libexif.so.12",
-        "runtimes/linux-x64/native/libfontconfig.so.1",
-        "runtimes/linux-x64/native/libfreetype.so.6",
-        "runtimes/linux-x64/native/libgdiplus.so",
-        "runtimes/linux-x64/native/libgif.so.7",
-        "runtimes/linux-x64/native/libglib-2.0.so.0",
-        "runtimes/linux-x64/native/libjbig.so.0",
-        "runtimes/linux-x64/native/libjpeg.so.8",
-        "runtimes/linux-x64/native/libpixman-1.so.0",
-        "runtimes/linux-x64/native/libpng12.so.0",
-        "runtimes/linux-x64/native/libtiff.so.5"
       ]
     },
     "runtime.native.System/4.3.0": {
@@ -8651,6 +8626,39 @@
         "ref/xamarinwatchos10/_._",
         "system.diagnostics.tracing.4.3.0.nupkg.sha512",
         "system.diagnostics.tracing.nuspec"
+      ]
+    },
+    "System.Drawing.Common/4.5.1": {
+      "sha512": "GiyeGi/v4xYDz1vCNFwFvhz9k1XddOG7VD3jxRqzRBCbTHji+s3HxxbxtoymuK4OadEpgotI8zQ5+GEEH9sUEQ==",
+      "type": "package",
+      "path": "system.drawing.common/4.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.Drawing.Common.dll",
+        "ref/netstandard2.0/System.Drawing.Common.dll",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "system.drawing.common.4.5.1.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Dynamic.Runtime/4.3.0": {
@@ -12160,9 +12168,9 @@
       "Microsoft.AspNetCore.App >= 2.2.0",
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
+      "System.Drawing.Common >= 4.5.1",
       "System.Text.Encoding >= 4.3.0",
-      "System.Text.Encoding.CodePages >= 4.5.1",
-      "runtime.linux-x64.CoreCompat.System.Drawing >= 1.0.0-beta009"
+      "System.Text.Encoding.CodePages >= 4.5.1"
     ]
   },
   "packageFolders": {
@@ -12172,11 +12180,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Tokmantsev\\Projects\\PresentationGenerator\\PresentationGenerator\\PresentationGenerator.csproj",
+      "projectUniqueName": "C:\\Tokmantsev\\Projects\\PresentationGenerator-master\\PresentationGenerator\\PresentationGenerator.csproj",
       "projectName": "PresentationGenerator",
-      "projectPath": "C:\\Tokmantsev\\Projects\\PresentationGenerator\\PresentationGenerator\\PresentationGenerator.csproj",
+      "projectPath": "C:\\Tokmantsev\\Projects\\PresentationGenerator-master\\PresentationGenerator\\PresentationGenerator.csproj",
       "packagesPath": "C:\\Users\\1\\.nuget\\packages\\",
-      "outputPath": "C:\\Tokmantsev\\Projects\\PresentationGenerator\\PresentationGenerator\\obj\\",
+      "outputPath": "C:\\Tokmantsev\\Projects\\PresentationGenerator-master\\PresentationGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12223,6 +12231,10 @@
             "version": "[2.2.0, )",
             "autoReferenced": true
           },
+          "System.Drawing.Common": {
+            "target": "Package",
+            "version": "[4.5.1, )"
+          },
           "System.Text.Encoding": {
             "target": "Package",
             "version": "[4.3.0, )"
@@ -12230,10 +12242,6 @@
           "System.Text.Encoding.CodePages": {
             "target": "Package",
             "version": "[4.5.1, )"
-          },
-          "runtime.linux-x64.CoreCompat.System.Drawing": {
-            "target": "Package",
-            "version": "[1.0.0-beta009, )"
           }
         },
         "imports": [
