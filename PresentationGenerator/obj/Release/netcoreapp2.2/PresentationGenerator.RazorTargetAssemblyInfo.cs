@@ -7,10 +7,12 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ProvideApplicationPartFactoryAttribute("Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyApplicationPartFac" +
+"tory, Microsoft.AspNetCore.Mvc.Razor")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("PresentationGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyProductAttribute("PresentationGenerator")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("PresentationGenerator")]
-[assembly: System.Reflection.AssemblyTitleAttribute("PresentationGenerator")]
+[assembly: System.Reflection.AssemblyTitleAttribute("PresentationGenerator.Views")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
