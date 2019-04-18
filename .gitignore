@@ -1,11 +1,7 @@
 
 .vs/PresentationGenerator/v15/.suo
-.vs/PresentationGenerator/v15/.suo
-.vs/PresentationGenerator/v15/.suo
-*.cache
 *.cache
 *.pdb
-.vs/PresentationGenerator/v15/.suo
-.vs/PresentationGenerator/v15/.suo
-.vs/PresentationGenerator/v15/.suo
 PresentationGenerator/Presentations/*.*
+*.txt
+PresentationGenerator\wwwroot\Presentations\*.*

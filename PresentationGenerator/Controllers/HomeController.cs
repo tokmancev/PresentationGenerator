@@ -75,7 +75,7 @@ namespace Presentation_Generator.Controllers
             ViewBag.SlidePath = slides[id];
             ViewBag.NextSlide = "~/Home/Slide/" + (id + 1).ToString() + "/" + name;
             ViewBag.PreviousSlide = "~/Home/Slide/" + (id - 1).ToString() + "/" + name;
-            ViewBag.DownloadLink = "Presentations/" + name + "/Slides.zip";
+            ViewBag.DownloadLink = "~/Presentations/" + name + "/Slides.zip";
             return View();
         }
 
