@@ -1,7 +1,9 @@
-
 .vs/PresentationGenerator/v15/.suo
 *.cache
 *.pdb
 PresentationGenerator/Presentations/*.*
 *.txt
-PresentationGenerator\wwwroot\Presentations\*.*
+PresentationGenerator/wwwroot/Presentations/*.*
+PresentationGenerator-master/PresentationGenerator/bin
+PresentationGenerator-master/PresentationGenerator-Test/bin
+PresentationGenerator-master/PresentationGenerator-Test/obj
