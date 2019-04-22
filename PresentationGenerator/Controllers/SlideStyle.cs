@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 public class SlideStyle
@@ -44,13 +46,29 @@ public class SlideStyle
         {
             slideStyle.Styles.Add(FontStyle.Bold);
             slideStyle.Texts.Add(text);
+            if (slideStyle.Colors.Count > 0)
+            {
+                slideStyle.Colors.Add(slideStyle.Colors.Last());
+            }
+            else
+            {
+                slideStyle.Colors.Add(DefaultColor);
+            }
         }
         else if (ExtractTag(input, "i", out text))
         {
             slideStyle.Styles.Add(FontStyle.Italic);
             slideStyle.Texts.Add(text);
+            if (slideStyle.Colors.Count > 0)
+            {
+                slideStyle.Colors.Add(slideStyle.Colors.Last());
+            }
+            else
+            {
+                slideStyle.Colors.Add(DefaultColor);
+            }
         }
-        string patternRGB = @".rgb.(\d{1,3}),(\d{1,3}),(\d{1,3})..(.+?)./rgb.";
+        string patternRGB = @"\[rgb.(\d{1,3}), (\d{1,3}), (\d{1,3}).\]";
         Match matchRGB = Regex.Match(input, patternRGB);
 
         while (matchRGB.Success)
@@ -65,27 +83,48 @@ public class SlideStyle
                 color
             );
 
-            string coloredText = matchRGB.Groups[4].Value;
+            //string coloredText = matchRGB.Groups[4].Value;
+
+            int finishIndex = input.IndexOf("[/rgb]", matchRGB.Index);
+
+            int startIndex = matchRGB.Index + matchRGB.Length;
+            //string coloredText = matchRGB.Groups[4].Value;
+            string coloredText = input.Substring(startIndex, finishIndex-startIndex);
             slideStyle.Texts.Add(
                 coloredText
             );
-
-            slideStyle.Styles.Add(DefaultStyle);
+            if (slideStyle.Styles.Count > 0)
+            {
+                slideStyle.Styles.Add(slideStyle.Styles.Last());
+            }
+            else
+            {
+                slideStyle.Styles.Add(DefaultStyle);
+            }
             matchRGB = matchRGB.NextMatch();
         }
 
-        if (slideStyle.Styles.Count == 0)
+        //TODO: add color tag handling
+        var lastTagIndex = input.IndexOf("</i>");
+
+        var textBegin = (lastTagIndex != -1) ? lastTagIndex + "</i>".Length : 0;
+
+        var lastTagIndex1 = input.IndexOf("</b>");
+
+        var textBegin1 = (lastTagIndex1 != -1) ? lastTagIndex1 + "</b>".Length : 0;
+
+        textBegin = Math.Max(textBegin, textBegin1);
+
+        var lastTagIndex2 = input.IndexOf("[/rgb]");
+
+        var textBegin2 = (lastTagIndex2 != -1) ? lastTagIndex2 + "[/rgb]".Length : 0;
+
+        textBegin = Math.Max(textBegin, textBegin2);
+
+        if (textBegin < input.Length)
         {
+            slideStyle.Texts.Add(input.Substring(textBegin));
             slideStyle.Styles.Add(DefaultStyle);
-        }
-
-        if (slideStyle.Texts.Count == 0)
-        {
-            slideStyle.Texts.Add(input);
-        }
-
-        if (slideStyle.Colors.Count == 0)
-        {
             slideStyle.Colors.Add(
                 DefaultColor
             );

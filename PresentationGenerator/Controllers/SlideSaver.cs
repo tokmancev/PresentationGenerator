@@ -22,6 +22,10 @@ namespace Presentation_Generator.Controllers
         private static void PlaceTextOnPicture(Slide slide, Bitmap resizedBackground)
         {
             var offset = new Offset(100, 150, WordStyles.CommonFontSize,400);
+            //TODO: fix tags in Regex
+            slide.Text = slide.Text.Replace("<span style=\"color: ", "[");
+            slide.Text = slide.Text.Replace(");\">", ")]");
+            slide.Text = slide.Text.Replace("</span>", "[/rgb]");
             SlideStyle.TryParse(slide.Text, out var slideStyle);
             
             for (int i = 0; i < slideStyle.Texts.Count; ++i)
