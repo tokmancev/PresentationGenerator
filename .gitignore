@@ -3,7 +3,8 @@
 *.pdb
 PresentationGenerator/Presentations/*.*
 *.txt
-PresentationGenerator/wwwroot/Presentations/*.*
-PresentationGenerator-master/PresentationGenerator/bin
-PresentationGenerator-master/PresentationGenerator-Test/bin
-PresentationGenerator-master/PresentationGenerator-Test/obj
+PresentationGenerator/wwwroot/Presentations
+PresentationGenerator/bin
+PresentationGenerator/obj
+PresentationGenerator-Test/bin
+PresentationGenerator-Test/obj
