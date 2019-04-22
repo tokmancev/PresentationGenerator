@@ -15,11 +15,6 @@
   </ItemGroup>
 
 
-  <ItemGroup>
-    <Folder Include="Presentations\Slides\" />
-  </ItemGroup>
-
-
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>Preserve</TypeScriptJSXEmit>

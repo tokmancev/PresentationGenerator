@@ -5,7 +5,6 @@ C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\bin\Re
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\bin\Release\netcoreapp2.2\PresentationGenerator.pdb
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\bin\Release\netcoreapp2.2\PresentationGenerator.Views.dll
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\bin\Release\netcoreapp2.2\PresentationGenerator.Views.pdb
-C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.csprojAssemblyReference.cache
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.csproj.CoreCompileInputs.cache
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.RazorAssemblyInfo.cache
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.RazorAssemblyInfo.cs
@@ -23,3 +22,4 @@ C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Re
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.dll
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.pdb
 C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.csproj.CopyComplete
+C:\Tokmantsev\Projects\PresentationGenerator-master\PresentationGenerator\obj\Release\netcoreapp2.2\PresentationGenerator.csprojAssemblyReference.cache

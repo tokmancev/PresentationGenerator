@@ -24,15 +24,10 @@ namespace Presentation_Generator.Controllers.Fonts
         public static int TitleFontSize { get; set; }
         public static int CommonFontSize { get; set; }
 
-        public static WordStyle GetWordStyle(string word, float fontSize)
+        public static WordStyle GetWordStyle(FontStyle style, Color color, int fontSize)
         {
-            var style = FontStyle.Regular;
-            var styleTags = word.Split('>')[0];
-            if (styleTags.Contains("b")) style = style | FontStyle.Bold;
-            if (styleTags.Contains("i")) style = style | FontStyle.Italic;
-            if (styleTags.Contains("u")) style = style | FontStyle.Underline;
-            var color = new SolidBrush(Color.WhiteSmoke);
-            return new WordStyle(new Font("Arial", fontSize, style), color);
+            var brush = new SolidBrush(color);
+            return new WordStyle(new Font("Arial", fontSize, style), brush);
         }
         #endregion
 

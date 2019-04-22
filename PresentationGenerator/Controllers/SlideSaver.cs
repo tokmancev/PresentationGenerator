@@ -22,6 +22,45 @@ namespace Presentation_Generator.Controllers
         private static void PlaceTextOnPicture(Slide slide, Bitmap resizedBackground)
         {
             var offset = new Offset(100, 150, WordStyles.CommonFontSize,400);
+            SlideStyle.TryParse(slide.Text, out var slideStyle);
+            
+            for (int i = 0; i < slideStyle.Texts.Count; ++i)
+            {
+                WordStyle wordStyle = WordStyles.GetWordStyle(
+                    slideStyle.Styles[i],
+                    slideStyle.Colors[i],
+                    WordStyles.CommonFontSize);
+
+                var words = ExtractWordsFromText(slideStyle.Texts[i]);
+                for (var j = 0; j < words.Length; j++)
+                {
+                    var word = words[j];
+                    if (word.Contains('\n'))
+                    {
+                        word = word.Replace("\n", "");
+                        offset.NewLine();
+                    }
+
+                    DrawWord(resizedBackground, word, wordStyle, offset);
+                    offset.TryMakeNewLine();
+                }
+
+                //DrawWord(resizedBackground, slideStyle.Texts[i], wordStyle, offset);
+            }
+        }
+
+        private static string[] ExtractWordsFromText(string text)
+        {
+            var words = text
+                .Split(new[] { " ", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+            words[0] = words[0].Replace("\n", " ");
+            return words;
+        }
+
+
+        /*private static void PlaceTextOnPicture(Slide slide, Bitmap resizedBackground)
+        {
+            var offset = new Offset(100, 150, WordStyles.CommonFontSize,400);
             var words = ExtractWordsFromText(slide);
             var wordStyle = WordStyles.CommonTextStyle;
             for (var i = 0; i < words.Length; i++)
@@ -44,6 +83,7 @@ namespace Presentation_Generator.Controllers
                 offset.TryMakeNewLine();
             }
         }
+        */
 
         private static void DrawWord(Bitmap resizedBackground, string word, WordStyle wordStyle, Offset offset)
         {
@@ -56,19 +96,21 @@ namespace Presentation_Generator.Controllers
             offset.MoveRight(graphics.MeasureString(word, wordStyle.Font).Width);
         }
 
+        //???дубль
+        private static void DrawTitleText(Graphics titleGraphic, string title,
+            WordStyle titleStyle, RectangleF titlePosition)
+        {
+            titleGraphic.DrawString(title,
+                titleStyle.Font,
+                titleStyle.SolidBrush, titlePosition,
+                new StringFormat(StringFormatFlags.NoClip));
+        }
+
         private static RectangleF GetWordPosition(Offset offset)
         {
             return new RectangleF(offset.StartPosX + offset.X,
                 offset.StartPosY + offset.Y,
                 800, 50);
-        }
-
-        private static string[] ExtractWordsFromText(Slide slide)
-        {
-            var words = slide.Text
-                .Split(new[] { " ", "\r" }, StringSplitOptions.RemoveEmptyEntries);
-            words[0] = words[0].Replace("\n", " ");
-            return words;
         }
 
         private static void PlaceTitleOnPicture(Slide slide, Bitmap resizedBackground)
@@ -81,14 +123,7 @@ namespace Presentation_Generator.Controllers
             DrawTitleText(titleGraphic, titleText, titleStyle, titlePosition);
         }
 
-        private static void DrawTitleText(Graphics titleGraphic, string title,
-            WordStyle titleStyle, RectangleF titlePosition)
-        {
-            titleGraphic.DrawString(title,
-                titleStyle.Font,
-                titleStyle.SolidBrush, titlePosition,
-                new StringFormat(StringFormatFlags.NoClip));
-        }
+       
 
         private static RectangleF GetTitleTextPosition(Graphics titleGraphic, string title,
             WordStyle titleStyle)

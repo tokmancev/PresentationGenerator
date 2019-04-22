@@ -1,9 +1,8 @@
 using NUnit.Framework;
+using Presentation_Generator.Controllers;
 using Presentation_Generator.Models;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text.RegularExpressions;
+
 
 namespace Tests
 {
@@ -13,14 +12,13 @@ namespace Tests
         public void SmokeTest()
         {
             var slideStyle = new SlideStyle("Hello");
-            Assert.Pass();
         }
 
         [Test]
         public void Should_have_default_style()
         {
             var slideStyle = new SlideStyle("Hello");
-            Assert.AreEqual(SlideStyle.TextStyle.Regular, slideStyle.Styles[0]);            
+            Assert.AreEqual(FontStyle.Regular, slideStyle.Styles[0]);            
         }
 
         [Test]
@@ -28,7 +26,7 @@ namespace Tests
         {
             var slideStyle = new SlideStyle("Hello");
             slideStyle.MakeBold();
-            Assert.AreEqual(SlideStyle.TextStyle.Bold, slideStyle.Styles[0]);
+            Assert.AreEqual(FontStyle.Bold, slideStyle.Styles[0]);
         }
 
         [Test]
@@ -38,18 +36,37 @@ namespace Tests
             Assert.AreEqual(Color.WhiteSmoke, slideStyle.Colors[0]);
         }
 
+
+        [Test]
+        public void Should_have_regular_style_by_default()
+        {
+            SlideStyle.TryParse("test", out var slideStyle);
+            Assert.AreEqual(Color.WhiteSmoke, slideStyle.Colors[0]);
+            Assert.AreEqual(FontStyle.Regular, slideStyle.Styles[0]);
+            Assert.AreEqual("test", slideStyle.Texts[0]);
+        }
+
         [Test]
         public void Should_have_bold_style_when_text_tag()
         {
-            SlideStyle.TryParse("[bold]test[/bold]", out var slideStyle);
-            Assert.AreEqual(SlideStyle.TextStyle.Bold, slideStyle.Styles[0]);
+            SlideStyle.TryParse("<b>\r\n\"test\"</b>", out var slideStyle);
+            Assert.AreEqual(FontStyle.Bold, slideStyle.Styles[0]);
+            Assert.AreEqual("\r\n\"test\"", slideStyle.Texts[0]);
         }
 
         [Test]
         public void Make_italic_from_tag()
         {
-            SlideStyle.TryParse("[italic]test[/italic]", out var slideStyle);
-            Assert.AreEqual(SlideStyle.TextStyle.Italic, slideStyle.Styles[0]);
+            SlideStyle.TryParse("<i>test</i>", out var slideStyle);
+            Assert.AreEqual(FontStyle.Italic, slideStyle.Styles[0]);
+        }
+
+        [Test]
+        public void Should_have_two_piece_of_text()
+        {
+            SlideStyle.TryParse("<i>test</i> styles", out var slideStyle);
+            Assert.AreEqual(2, slideStyle.Texts.Count);
+            Assert.AreEqual(" styles", slideStyle.Texts[1]);
         }
         private bool ColorsAreEqual(Color color1, Color color2)
         {
@@ -91,98 +108,22 @@ namespace Tests
                 Assert.AreEqual(textElements[i], textIterator.Current);
             }
         }
-
-    }
-
-    public class SlideStyle
-    {
-        public SlideStyle(string text)
+        [Test]
+        public void Should_be_red_text_on_picture()
         {
-            Styles.Add(TextStyle.Regular);
-            Colors.Add(Color.WhiteSmoke);
-            Texts.Add(text);
+            Slide slide = new Slide();
+            slide.Text = "[rgb(255,0,0)]test[/rgb]";
+            slide.PathToBackgroundPicture = "background.jpg";
+            SlideSaver.SaveSlideAsJpeg(slide, "0.jpg");
         }
 
-        private SlideStyle()
-        {}
-        public List<Color> Colors = new List<Color>();
-        
-        public List<string> Texts = new List<string>();
-
-        public enum TextStyle
+        [Test]
+        public void Should_be_two_colors_on_picture()
         {
-            Regular,
-            Bold,
-            Italic
-        }
-
-        public List<TextStyle> Styles = new List<TextStyle>();
-        
-
-        public SlideStyle MakeBold()
-        {
-            Styles[0] = TextStyle.Bold;
-            return this;
-        }
-
-        public SlideStyle MakeItalic()
-        {
-            Styles[0] = TextStyle.Italic;
-            return this;
-        }
-
-        public static bool TryParse(string input, out SlideStyle slideStyle)
-        {
-            slideStyle = new SlideStyle();
-            if (ExtractTag(input, "bold", out string text))
-            {
-                slideStyle.Styles.Add(TextStyle.Bold);
-                slideStyle.Texts.Add(text);
-            }
-
-            if (ExtractTag(input, "italic", out text))
-            {
-                slideStyle.Styles.Add(TextStyle.Italic);
-                slideStyle.Texts.Add(text);
-            }
-
-            string patternRGB = @".rgb.(\d{1,3}),(\d{1,3}),(\d{1,3})..(.+?)./rgb.";
-            Match matchRGB = Regex.Match(input, patternRGB);
-
-            while (matchRGB.Success)
-            {
-                Color color = Color.FromArgb(
-                    int.Parse(matchRGB.Groups[1].Value),
-                    int.Parse(matchRGB.Groups[2].Value),
-                    int.Parse(matchRGB.Groups[3].Value)
-                );
-
-                slideStyle.Colors.Add(
-                    color
-                );
-
-                slideStyle.Texts.Add(
-                    matchRGB.Groups[4].Value
-                );
-
-                matchRGB = matchRGB.NextMatch();
-            }
-
-            return true;
-        }
-
-        private static bool ExtractTag(string input, string tag, out string text)
-        {
-            string patternBold = @"." + tag + ".(.+?)./" + tag + ".";
-            Match match = Regex.Match(input, patternBold);
-
-            if (match.Success)
-            {
-                text = match.Groups[1].ToString();
-                return true;
-            }
-            text = string.Empty;
-            return false;
+            Slide slide = new Slide();
+            slide.Text = "[rgb(255,0,0)]My[/rgb] [rgb(0,0,255)]test[/rgb]";
+            slide.PathToBackgroundPicture = "background.jpg";
+            SlideSaver.SaveSlideAsJpeg(slide, "1.jpg");
         }
     }
 }
