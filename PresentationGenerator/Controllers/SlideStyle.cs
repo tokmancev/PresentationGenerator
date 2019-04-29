@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,12 +9,13 @@ public class SlideStyle
 {
     public SlideStyle(string text)
     {
-        Styles.Add(FontStyle.Regular);
-        Colors.Add(Color.WhiteSmoke);
+        Styles.Add(DefaultStyle);
+        Colors.Add(DefaultColor);
         Texts.Add(text);
+        Backgrounds.Add(DefaultBackground);
     }
 
-    private SlideStyle()
+    public SlideStyle()
     { }
 
     private static readonly Color DefaultColor = Color.WhiteSmoke;
@@ -24,17 +26,20 @@ public class SlideStyle
     private static readonly FontStyle DefaultStyle = FontStyle.Regular;
 
     public List<FontStyle> Styles = new List<FontStyle>();
-    
 
-    public SlideStyle MakeBold()
+    public List<Color> Backgrounds = new List<Color>();
+
+    public static readonly Color DefaultBackground = Color.Empty;
+
+    public SlideStyle MakeBold(string text)
     {
-        Styles[0] = FontStyle.Bold;
+        this.SetStyle(text, FontStyle.Bold);
         return this;
     }
 
-    public SlideStyle MakeItalic()
+    public SlideStyle MakeItalic(string text)
     {
-        Styles[0] = FontStyle.Italic;
+        this.SetStyle(text, FontStyle.Italic);
         return this;
     }
 
@@ -44,117 +49,161 @@ public class SlideStyle
         slideStyle = new SlideStyle();
         if (ExtractTag(input, "b", out string text))
         {
-            slideStyle.Styles.Add(FontStyle.Bold);
-            slideStyle.Texts.Add(text);
-            if (slideStyle.Colors.Count > 0)
-            {
-                slideStyle.Colors.Add(slideStyle.Colors.Last());
-            }
-            else
-            {
-                slideStyle.Colors.Add(DefaultColor);
-            }
+            slideStyle.MakeBold(text);
         }
         else if (ExtractTag(input, "i", out text))
         {
-            slideStyle.Styles.Add(FontStyle.Italic);
-            slideStyle.Texts.Add(text);
-            if (slideStyle.Colors.Count > 0)
-            {
-                slideStyle.Colors.Add(slideStyle.Colors.Last());
-            }
-            else
-            {
-                slideStyle.Colors.Add(DefaultColor);
-            }
+            slideStyle.MakeItalic(text);
         }
-        string patternRGB = @"\[rgb.(\d{1,3}), (\d{1,3}), (\d{1,3}).\]";
-        Match matchRGB = Regex.Match(input, patternRGB);
+        slideStyle.ExtractColor(input);
 
-        while (matchRGB.Success)
+        int plainTextBegins = FindWhereTagEndsInText(input);
+        slideStyle.MakeTextPlain(input, plainTextBegins);
+        return true;
+    }
+
+
+    private void ExtractColor(string input)
+    {
+        HtmlDocument htmlSnippet = new HtmlDocument();
+        htmlSnippet.LoadHtml(input);
+        if (!htmlSnippet.DocumentNode.HasChildNodes)
         {
-            Color color = Color.FromArgb(
+            return;
+        }
+        foreach (HtmlNode node in htmlSnippet.DocumentNode.ChildNodes)
+        {
+            if (node.Name != "span")
+            {
+                continue;
+            }
+            var text = node.InnerText;
+
+            string patternRGB = @"rgb.(\d{1,3}), (\d{1,3}), (\d{1,3})";
+            Match matchRGB = Regex.Match(node.Attributes[0].Value, patternRGB);
+
+            if (!matchRGB.Success)
+            {
+                continue;
+            }
+            var color = Color.FromArgb(
                 int.Parse(matchRGB.Groups[1].Value),
                 int.Parse(matchRGB.Groups[2].Value),
                 int.Parse(matchRGB.Groups[3].Value)
             );
 
-            slideStyle.Colors.Add(
-                color
-            );
-
-            //string coloredText = matchRGB.Groups[4].Value;
-
-            int finishIndex = input.IndexOf("[/rgb]", matchRGB.Index);
-
-            int startIndex = matchRGB.Index + matchRGB.Length;
-            //string coloredText = matchRGB.Groups[4].Value;
-            string coloredText = input.Substring(startIndex, finishIndex-startIndex);
-            slideStyle.Texts.Add(
-                coloredText
-            );
-            if (slideStyle.Styles.Count > 0)
+            if (node.Attributes[0].Value.StartsWith("color"))
             {
-                slideStyle.Styles.Add(slideStyle.Styles.Last());
+                this.SetColor(text, color);
             }
             else
             {
-                slideStyle.Styles.Add(DefaultStyle);
+                this.SetBackground(text, color);
             }
-            matchRGB = matchRGB.NextMatch();
+        }
+    }
+
+    private void SetBackground(string text, Color color)
+    {
+        this.Texts.Add(text);
+        this.Backgrounds.Add(color);
+
+        if (this.Styles.Count > 0)
+        {
+            this.Styles.Add(this.Styles.Last());
+        }
+        else
+        {
+            this.Styles.Add(DefaultStyle);
         }
 
-        //TODO: add color tag handling
-        var lastTagIndex = input.IndexOf("</i>");
+        if (this.Colors.Count > 0)
+        {
+            this.Colors.Add(this.Colors.Last());
+        }
+        else
+        {
+            this.Colors.Add(DefaultColor);
+        }
 
-        var textBegin = (lastTagIndex != -1) ? lastTagIndex + "</i>".Length : 0;
+    }
 
-        var lastTagIndex1 = input.IndexOf("</b>");
-
-        var textBegin1 = (lastTagIndex1 != -1) ? lastTagIndex1 + "</b>".Length : 0;
-
-        textBegin = Math.Max(textBegin, textBegin1);
-
-        var lastTagIndex2 = input.IndexOf("[/rgb]");
-
-        var textBegin2 = (lastTagIndex2 != -1) ? lastTagIndex2 + "[/rgb]".Length : 0;
-
-        textBegin = Math.Max(textBegin, textBegin2);
-
+    private void MakeTextPlain(string input, int textBegin)
+    {
         if (textBegin < input.Length)
         {
-            slideStyle.Texts.Add(input.Substring(textBegin));
-            slideStyle.Styles.Add(DefaultStyle);
-            slideStyle.Colors.Add(
+            this.Texts.Add(input.Substring(textBegin));
+            this.Styles.Add(DefaultStyle);
+            this.Colors.Add(
                 DefaultColor
             );
+            this.Backgrounds.Add(Color.Empty);
         }
-        return true;
+    }
+
+    // при усложнении использовать паттерн Builder
+    private void SetColor(string text, Color color)
+    {
+        this.Texts.Add(text);
+        this.Colors.Add(color);
+        this.Backgrounds.Add(DefaultBackground);
+
+        if (this.Styles.Count > 0)
+        {
+            this.Styles.Add(this.Styles.Last());
+        }
+        else
+        {
+            this.Styles.Add(DefaultStyle);
+        }
+    }
+
+    // при усложнении использовать паттерн Builder
+    private void SetStyle(string text, FontStyle fontStyle)
+    {
+        this.Styles.Add(fontStyle);
+        this.Texts.Add(text);
+        this.Backgrounds.Add(DefaultBackground);
+        if (this.Colors.Count > 0)
+        {
+            this.Colors.Add(this.Colors.Last());
+        }
+        else
+        {
+            this.Colors.Add(DefaultColor);
+        }
+    }
+
+    private static int FindWhereTagEndsInText(string input)
+    {
+        string[] TagEnd = new[] { "</i>", "</b>", "</span>" };
+
+        int lastTagIndex, textBegin;
+        int maxIndex = 0;
+        foreach (var tagEnd in TagEnd)
+        {
+            lastTagIndex = input.IndexOf(tagEnd);
+            textBegin = (lastTagIndex != -1) ? lastTagIndex + tagEnd.Length : 0;
+            maxIndex = Math.Max(maxIndex, textBegin);
+        }
+        return maxIndex;
     }
 
     private static bool ExtractTag(string input, string tag, out string text)
     {
-        //string patternBold = @"<" + tag + @">(\W*.+?\W*)</" + tag + ">";
-        //Match match = Regex.Match(input, patternBold);
-
-        //if (match.Success)
-        //{
-        //    text = match.Groups[1].ToString();
-        //    return true;
-        //}
         text = string.Empty;
-        var startIndex = input.IndexOf("<" + tag + ">");
-        if(startIndex == -1)
+
+        HtmlDocument htmlSnippet = new HtmlDocument();
+        htmlSnippet.LoadHtml(input);
+        if (htmlSnippet.DocumentNode.HasChildNodes)
         {
-            return false;
+            var node = htmlSnippet.DocumentNode.FirstChild;
+            if (node.Name != tag)
+            {
+                return false;
+            }
+            text = node.InnerText;
         }
-        startIndex += 1 + tag.Length + 1;
-        var finishIndex = input.IndexOf("</" + tag + ">");
-        if (finishIndex == -1)
-        {
-            finishIndex = input.Length - 1;
-        }
-        text = input.Substring(startIndex, finishIndex - startIndex);
         return true;
     }
 }

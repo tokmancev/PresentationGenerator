@@ -24,10 +24,15 @@ namespace Presentation_Generator.Controllers.Fonts
         public static int TitleFontSize { get; set; }
         public static int CommonFontSize { get; set; }
 
-        public static WordStyle GetWordStyle(FontStyle style, Color color, int fontSize)
-        {
-            var brush = new SolidBrush(color);
-            return new WordStyle(new Font("Arial", fontSize, style), brush);
+        public static WordStyle GetWordStyle(
+            FontStyle style, 
+            Color color, 
+            Color background, 
+            int fontSize
+        ){
+            var textBrush = new SolidBrush(color);
+            var backBrush = new SolidBrush(background);
+            return new WordStyle(new Font("Arial", fontSize, style), textBrush, backBrush);
         }
         #endregion
 
@@ -56,8 +61,10 @@ namespace Presentation_Generator.Controllers.Fonts
         #region LaziesInit
         private static WordStyle InitTitleStyle()
         {
-            return new WordStyle(new Font("Arial", TitleFontSize, FontStyle.Bold),
-                new SolidBrush(Color.WhiteSmoke));
+            return new WordStyle(
+                new Font("Arial", TitleFontSize, FontStyle.Bold),
+                new SolidBrush(Color.WhiteSmoke)           
+            );
         }
 
         private static WordStyle InitCommonTextStyle()

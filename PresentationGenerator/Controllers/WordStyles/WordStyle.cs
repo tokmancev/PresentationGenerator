@@ -7,11 +7,13 @@ namespace Presentation_Generator.Controllers.Fonts
     {
         public Font Font { get; }
         public SolidBrush SolidBrush { get; }
+        public SolidBrush backgroundBrush { get; }
 
-        public WordStyle(Font font, SolidBrush solidBrush)
+        public WordStyle(Font font, SolidBrush textBrush, SolidBrush backBrush = null)
         {
             Font = font;
-            SolidBrush = solidBrush;
+            SolidBrush = textBrush;
+            backgroundBrush = backBrush;
         }
 
         public override bool Equals(object obj)

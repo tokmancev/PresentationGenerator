@@ -17,22 +17,17 @@ namespace Presentation_Generator.Controllers
             resizedBackground.Save(outputPath, ImageFormat.Jpeg);
         }
 
-
-
         private static void PlaceTextOnPicture(Slide slide, Bitmap resizedBackground)
         {
-            var offset = new Offset(100, 150, WordStyles.CommonFontSize,400);
-            //TODO: fix tags in Regex
-            slide.Text = slide.Text.Replace("<span style=\"color: ", "[");
-            slide.Text = slide.Text.Replace(");\">", ")]");
-            slide.Text = slide.Text.Replace("</span>", "[/rgb]");
+            var offset = new Offset(100, 150, WordStyles.CommonFontSize, 400);
             SlideStyle.TryParse(slide.Text, out var slideStyle);
-            
+
             for (int i = 0; i < slideStyle.Texts.Count; ++i)
             {
                 WordStyle wordStyle = WordStyles.GetWordStyle(
                     slideStyle.Styles[i],
                     slideStyle.Colors[i],
+                    slideStyle.Backgrounds[i],
                     WordStyles.CommonFontSize);
 
                 var words = ExtractWordsFromText(slideStyle.Texts[i]);
@@ -48,8 +43,6 @@ namespace Presentation_Generator.Controllers
                     DrawWord(resizedBackground, word, wordStyle, offset);
                     offset.TryMakeNewLine();
                 }
-
-                //DrawWord(resizedBackground, slideStyle.Texts[i], wordStyle, offset);
             }
         }
 
@@ -61,43 +54,30 @@ namespace Presentation_Generator.Controllers
             return words;
         }
 
-
-        /*private static void PlaceTextOnPicture(Slide slide, Bitmap resizedBackground)
-        {
-            var offset = new Offset(100, 150, WordStyles.CommonFontSize,400);
-            var words = ExtractWordsFromText(slide);
-            var wordStyle = WordStyles.CommonTextStyle;
-            for (var i = 0; i < words.Length; i++)
-            {
-                var word = words[i];
-                if (words[i].Contains("<"))
-                {
-                    wordStyle = WordStyles.GetWordStyle(words[i], WordStyles.CommonFontSize);
-                    word = words[i].Remove(0, words[i].IndexOf('>') + 1);
-                }
-                word = word.Replace("$]", "");
-                if (word.Contains('\n'))
-                {
-                    word = word.Replace("\n", "");
-                    offset.NewLine();
-                }
-                             
-                DrawWord(resizedBackground, word, wordStyle, offset);
-                if (words[i].Contains("$]")) wordStyle = WordStyles.CommonTextStyle;
-                offset.TryMakeNewLine();
-            }
-        }
-        */
-
-        private static void DrawWord(Bitmap resizedBackground, string word, WordStyle wordStyle, Offset offset)
-        {
+        private static void DrawWord(
+            Bitmap resizedBackground, 
+            string word, 
+            WordStyle wordStyle, 
+            Offset offset
+        ){
             var graphics = Graphics.FromImage(resizedBackground);
             var wordPosition = GetWordPosition(offset);
-            graphics.DrawString(word,
+            if (wordStyle.backgroundBrush != null)
+            {
+                graphics.FillRectangle(wordStyle.backgroundBrush, wordPosition);
+            }
+
+            graphics.DrawString(
+                word,
                 wordStyle.Font,
-                wordStyle.SolidBrush, wordPosition,
-                new StringFormat(StringFormatFlags.NoClip));
+                wordStyle.SolidBrush, 
+                wordPosition,
+                new StringFormat(StringFormatFlags.NoClip)
+            );
+
             offset.MoveRight(graphics.MeasureString(word, wordStyle.Font).Width);
+            //Example, assuming g is your Graphics object, image is your Image object, and color is your Color object:
+            //g.FillRectangle(new SolidBrush(color), new Rectangle(Point.Empty, image.Size));
         }
 
         //???дубль
@@ -126,8 +106,6 @@ namespace Presentation_Generator.Controllers
 
             DrawTitleText(titleGraphic, titleText, titleStyle, titlePosition);
         }
-
-       
 
         private static RectangleF GetTitleTextPosition(Graphics titleGraphic, string title,
             WordStyle titleStyle)
